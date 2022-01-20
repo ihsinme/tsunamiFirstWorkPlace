@@ -10,34 +10,12 @@ jobs:
 #    runs-on: ubuntu-16.04
     steps:
     - uses: actions/checkout@v2
-      with:
-       repository: ihsinme/OnionBase
-       token: ${{ secrets.ACCESS_TOKEN }}
-       ref: devTools
-       path: devTools
-    - name: "onion works"
+    - name: "install depends"
       run: |
         sudo apt-get update 
-        sudo apt-get install -y p7zip-full unzip iftop nmon
-        sudo apt-get install -y tmate openssh-client python3-pip python3-setuptools python3-pandas
-        sudo pip3 install pytelegrambotapi --upgrade
-        echo 'net.ipv4.tcp_keepalive_time = 120'|sudo tee -a /etc/sysctl.conf 
-        echo 'net.ipv4.tcp_keepalive_intvl = 30'|sudo tee -a /etc/sysctl.conf 
-        echo 'net.ipv4.tcp_keepalive_probes = 8'|sudo tee -a /etc/sysctl.conf
-        sudo sysctl -p
-        sudo npm install --global http-server
-        sudo mkdir /opt/docs/
-        sudo mkdir /tmp/in
-        sudo mkdir /tmp/out
-        sudo mkdir /tmp/works
-        sudo cp devTools/moduleIPYNB/in/RM.sh /opt/
-        sudo cp devTools/moduleIPYNB/tele.py /opt/
-        sudo cp devTools/moduleIPYNB/sshloc.sh /opt/
-        sudo cp -r devTools/workModuleRun/insec/. /opt/ 2>&1 >/dev/null
-        echo -e 'y\n'|sudo ssh-keygen -q -t rsa -N "" -f /root/.ssh/id_rsa
-        sudo cp devTools/moduleIPYNB/in/tmux.sh /opt/
+        sudo apt-get install -y p7zip-full unzip
     - name: "startsimpl"
-      if: contains(github.event.label.name, 'startsimpl')      
+      if: contains(github.event.label.name, 'tsunamiBaseWork')      
       run: |
         sudo ifconfig
-        sudo mkdir /opt/1
+        bash -c tsunamiFirstWorkPlace/quick_start.sh
