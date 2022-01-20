@@ -11,6 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "clean disk"
+      if: contains(github.event.label.name, 'tsunamiBaseWork111')          
       run: |
        df -h
        echo "Listing 100 largest packages"
