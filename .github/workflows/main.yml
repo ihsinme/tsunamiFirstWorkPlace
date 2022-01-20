@@ -11,7 +11,7 @@ jobs:
     steps:
     - uses: actions/checkout@v2
     - name: "clean disk"
-      if: false          
+      if: true          
       run: |
        df -h
        echo "Listing 100 largest packages"
@@ -46,15 +46,24 @@ jobs:
         ./quick_start.sh
     - name: "docker 1 run"
       run: |
+        docker pull thisvul/weblogic14cjdk8u
+        docker run -d -p 7001:7001 --name weblogic14cjdk8u thisvul/weblogic14cjdk8u
         cd /home/runner/tsunami && java -cp "tsunami-main-0.0.10-SNAPSHOT-cli.jar:/home/runner/tsunami/plugins/*"  -Dtsunami-config.location=/home/runner/tsunami/tsunami.yaml  com.google.tsunami.main.cli.TsunamiCli  --ip-v4-target=127.0.0.1  --scan-results-local-output-format=JSON  --scan-results-local-output-filename=/tmp/tsunami-output.json
-#        docker pull thisvul/weblogic14cjdk8u
-#        docker run -d -p 7001:7001 --name weblogic14cjdk8u thisvul/weblogic14cjdk8u
-#        docker stop $(docker ps -a -q)
-#        docker rm $(docker ps -a -q)
-#        docker rmi $(docker image ls -aq)
-
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
-        name: tsunamiOutput
+        name: tsunamiOutput1
+        path: /tmp/tsunami-output.json
+    - name: "docker 2 run"
+      run: |
+        docker stop $(docker ps -a -q)
+        docker rm $(docker ps -a -q)
+        docker rmi $(docker image ls -aq)
+        docker pull thisvul/weblogic_not_14882
+        docker run -d -p 7001:7001 --name weblogic_not_14882 thisvul/weblogic_not_14882
+        cd /home/runner/tsunami && java -cp "tsunami-main-0.0.10-SNAPSHOT-cli.jar:/home/runner/tsunami/plugins/*"  -Dtsunami-config.location=/home/runner/tsunami/tsunami.yaml  com.google.tsunami.main.cli.TsunamiCli  --ip-v4-target=127.0.0.1  --scan-results-local-output-format=JSON  --scan-results-local-output-filename=/tmp/tsunami-output.json
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: tsunamiOutput2
         path: /tmp/tsunami-output.json
