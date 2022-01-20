@@ -17,4 +17,6 @@ jobs:
     - name: "tsunamiBaseWork"
       if: contains(github.event.label.name, 'tsunamiBaseWork')      
       run: |
+        chmod +x ./quick_start.sh
+        chmod +x workData/build_all.sh 
         bash -c ./quick_start.sh
