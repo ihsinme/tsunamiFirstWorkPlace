@@ -42,7 +42,6 @@ jobs:
     - name: "build plagins and tsunami"
 #      if: contains(github.event.label.name, 'tsunamiBaseWork')      
       run: |
-        chown root ./quick_start.sh'
         chmod +x ./quick_start.sh
         ./quick_start.sh
     - name: "docker 1 run"
