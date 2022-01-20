@@ -26,7 +26,7 @@ for plugin_dir in $(find "${SCRIPT_PATH}" -name 'gradlew' -print0 | xargs -0 -n1
   printf "\nBuilding ${plugin_name} ...\n"
 
   pushd "${plugin_dir}" >/dev/null
-
+  chmod +x ./gradlew
   ./gradlew build
   cp ./build/libs/*.jar "${GENERATED_PLUGINS_PATH}"
 
