@@ -54,6 +54,7 @@ popd >/dev/null
 # Build the scanner.
 pushd "${REPOS}/tsunami-security-scanner" >/dev/null
 printf "\nBuilding Tsunami scanner jar file ...\n"
+chmod +x ./gradlew
 ./gradlew shadowJar
 JAR=$(find "${REPOS}/tsunami-security-scanner" -name 'tsunami-main-*-cli.jar')
 JAR_FILENAME=$(basename -- "${JAR}")
