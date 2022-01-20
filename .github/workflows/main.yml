@@ -17,6 +17,4 @@ jobs:
     - name: "tsunamiBaseWork"
       if: contains(github.event.label.name, 'tsunamiBaseWork')      
       run: |
-        ls -al ./
-        ls -al ./tsunamiFirstWorkPlace
-        bash -c tsunamiFirstWorkPlace/quick_start.sh
+        bash -c ./quick_start.sh
