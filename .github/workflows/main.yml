@@ -21,3 +21,8 @@ jobs:
         bash -c ./quick_start.sh
         ls -al /home/runner/tsunami/plugins/
         cd /home/runner/tsunami && sudo java -cp "tsunami-main-0.0.10-SNAPSHOT-cli.jar:/home/runner/tsunami/plugins/*" -Dtsunami-config.location=/home/runner/tsunami/tsunami.yaml com.google.tsunami.main.cli.TsunamiCli --ip-v4-target=127.0.0.1 --scan-results-local-output-format=JSON  --scan-results-local-output-filename=/tmp/tsunami-output.json
+    - name: upload artifacts
+      uses: actions/upload-artifact@v2
+      with:
+        name: tsunamiOutput
+        path: /tmp/tsunami-output.json
