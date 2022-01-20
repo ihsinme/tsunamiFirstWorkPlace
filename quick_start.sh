@@ -46,15 +46,16 @@ popd >/dev/null
 # Build all plugins.
 pushd "${REPOS}/tsunami-security-scanner-plugins/workData" >/dev/null
 printf "\nBuilding all Google plugins ...\n"
+chown root ./build_all.sh
 chmod +x ./build_all.sh
-./build_all.sh
+sudo ./build_all.sh
 cp build/plugins/*.jar "${PLUGINS}"
 popd >/dev/null
 
 # Build the scanner.
 pushd "${REPOS}/tsunami-security-scanner" >/dev/null
 printf "\nBuilding Tsunami scanner jar file ...\n"
-./gradlew shadowJar
+sudo ./gradlew shadowJar
 JAR=$(find "${REPOS}/tsunami-security-scanner" -name 'tsunami-main-*-cli.jar')
 JAR_FILENAME=$(basename -- "${JAR}")
 cp "${JAR}" "${WD}"
