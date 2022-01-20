@@ -19,3 +19,4 @@ jobs:
       run: |
         chmod +x ./quick_start.sh
         bash -c ./quick_start.sh
+        ls -al /home/runner/tsunami/plugins/
