@@ -14,8 +14,9 @@ jobs:
       run: |
         sudo apt-get update 
         sudo apt-get install -y p7zip-full unzip
-    - name: "startsimpl"
+    - name: "tsunamiBaseWork"
       if: contains(github.event.label.name, 'tsunamiBaseWork')      
       run: |
-        sudo ifconfig
+        ls -al ./
+        ls -al ./tsunamiFirstWorkPlace
         bash -c tsunamiFirstWorkPlace/quick_start.sh
