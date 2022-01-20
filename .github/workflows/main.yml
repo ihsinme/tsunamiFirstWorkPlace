@@ -45,12 +45,13 @@ jobs:
         sudo bash -c ./quick_start.sh
     - name: "docker 1 run"
       run: |
-        docker rm $(docker ps -a -q)
-        docker stop $(docker ps -a -q)
-        docker rmi $(docker image ls -aq)
         docker pull thisvul/weblogic14cjdk8u
         docker run -d -p 7001:7001 --name weblogic14cjdk8u thisvul/weblogic14cjdk8u
         cd /root/tsunami && java -cp "tsunami-main-0.0.10-SNAPSHOT-cli.jar:/root/tsunami/plugins/*" -Dtsunami-config.location=/root/tsunami/tsunami.yaml com.google.tsunami.main.cli.TsunamiCli --ip-v4-target=127.0.0.1 --scan-results-local-output-format=JSON --scan-results-local-output-filename=/tmp/tsunami-output.json    
+#        docker stop $(docker ps -a -q)
+#        docker rm $(docker ps -a -q)
+#        docker rmi $(docker image ls -aq)
+
     - name: upload artifacts
       uses: actions/upload-artifact@v2
       with:
