@@ -46,6 +46,7 @@ popd >/dev/null
 # Build all plugins.
 pushd "${REPOS}/tsunami-security-scanner-plugins/workData" >/dev/null
 printf "\nBuilding all Google plugins ...\n"
+chmod +x ./build_all.sh
 ./build_all.sh
 cp build/plugins/*.jar "${PLUGINS}"
 popd >/dev/null
